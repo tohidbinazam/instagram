@@ -16,7 +16,7 @@ const EmailSent = () => {
                         </div>
                         <div className="card-body">
                             <h6 className='my-3'>Email Sent</h6>
-                            <p>We sent an email to <b>{ email }</b> with a link to get back into your account.</p>
+                            <p className='my-3'>We sent an email to <b>{ email }</b> with a link to get back into your account.</p>
                             <Link className='btn btn-secondary' to={`/${main}`}>Try Again</Link>
                             <b className='mx-2'>OR</b>
                             <Link className='btn btn-primary' to='/login'>OK</Link>

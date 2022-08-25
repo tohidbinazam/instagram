@@ -10,10 +10,10 @@ import createError from './createError.js';
         const verify = jwt.verify(token, process.env.SECRET_KEY)
 
         // Get token data
-        const token_data = await Token.findOneAndDelete({ token })
+        const token_data = await Token.findOne({ token })
         
         if (verify && token_data) {
-            res.status(200).json('Token is ok')
+            res.status(200).json(verify.id)
         } else {
             next(createError(404, 'Expire or Invalid URL'))
         }

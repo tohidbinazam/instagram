@@ -57,7 +57,7 @@ function App() {
         <Route path='/login' element={ <AuthMiddleware> <Login /> </AuthMiddleware> } />
         <Route path='/signup' element={ <AuthMiddleware> <SignUp /> </AuthMiddleware> } />
         <Route path='/:username' element={ <AuthMiddleware> <Profile /> </AuthMiddleware> } />
-        <Route path='/verify-account/:token/:user_id' element={ <Verify /> } />
+        <Route path='/verify-account/:token' element={ <Verify /> } />
         <Route path='/forgot-password' element={ <ForgotPassword /> } />
         <Route path='/reset-password/:token' element={ <ResetPassword /> } />
         <Route path='/email-sent/:main/:email' element={ <EmailSent /> } />

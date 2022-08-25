@@ -3,15 +3,16 @@ import axios from 'axios'
 import { Link, useParams } from 'react-router-dom';
 import TokenValidate from '../../utility/TokenValidate';
 
+
 const Verify = () => {
 
 
   const [status, setStatus] = useState('')
 
-  const { token, user_id } = useParams()
+  const { token } = useParams()
 
-  // Token validate
-  TokenValidate(token, '/account-verify')
+  // TokenValidate if right the token then return user id
+  const user_id =  TokenValidate(token, '/account-verify')
 
   // User verify update
   axios.post('http://localhost:5050/api/user/verify', { user_id }).then(res => {
@@ -19,7 +20,6 @@ const Verify = () => {
   }).catch(() => {
     setStatus('Invalid verify URL')
   })
-
 
   return (
     <div>

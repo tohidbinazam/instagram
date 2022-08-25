@@ -135,7 +135,6 @@ export const userRegister = async (req, res, next) => {
         const user =  await User.create({ ...req.body, password })
         
         const verify_link = await createLink(user._id, 'verify-account', '30d')
-
         sentMail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
         
         res.status(200).json(user)
@@ -238,7 +237,7 @@ export const resentVerify = async (req, res, next) => {
     try {
         const user = await User.findOne({ email })
 
-        if (!user.isVerified) {
+        if (user && !user.isVerified) {
             const verify_link = await createLink(user._id, 'verify-account', '30d')
             sentMail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
 
@@ -250,4 +249,30 @@ export const resentVerify = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+}
+
+
+
+
+
+
+export const forgotPassword = async (req, res, next) => {
+    
+    const { email } = req.body
+    try {
+        const user = await User.findOne({ email })
+    
+        if (user) {
+            const reset_pass_link = await createLink(user._id, 'reset-password')
+            sentMail(user.email, 'Reset Password', `Reset Your Password by click this <a href=${reset_pass_link}>LINK</a>`)
+            res.status(200).json('Link sent successfully ')
+        }else{
+            return next(createError(404, 'User not found'))
+    
+        }
+    } catch (error) {
+        next(error)
+    }
+    
+
 }

@@ -15,7 +15,7 @@ const createLink = async (id, reason, jwt_exp ) => {
     await Token.create({ userId : id, reason, token })
 
     // Send activation email
-    return `http://localhost:3000/${reason}/${token}/${id}`
+    return `http://localhost:3000/${reason}/${token}`
 
 }
 
