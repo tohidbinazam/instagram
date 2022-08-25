@@ -1,0 +1,127 @@
+.timeline-warper{
+    width: 850px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    .post{
+        width: 58%;
+        background: white;
+        border: 1px solid #d8d8d8;
+        border-radius: 10px;
+        margin-bottom: 20px;
+
+        .post-header{
+            height: 70px;
+            padding: 0px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+
+            .user-info{
+                display: flex;
+
+                img{
+                    width: 48px;
+                    border-radius: 50%;
+                    margin-right: 12px;
+                }
+                .user{
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+        .post-image{
+            width: 100%;
+        }
+        .post-details{
+            width: 92%;
+            margin: auto;
+            padding: 5px 0px 16px;
+            border-bottom: 1px solid #d8d8d8;
+            
+            .reaction-bookmark{
+                display: flex;
+                justify-content: space-between;
+
+                .reaction {
+                    a{
+                        margin-right: 10px;
+                    }
+                }
+                a{
+                    font-size: 30px;
+                    color: black;
+                }
+            }
+            .likes{
+                margin: 6px 0px;
+            }
+            p{
+                color: #525252;
+            }
+            .comments-count{
+                color: #888;
+            }
+            .comments{
+                .comment{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin: 5px 0px;
+                }
+            }
+            .time{
+                font-size:12px ;
+                color: #888;
+            }
+        }
+        .write-comment{
+            width: 92%;
+            margin: auto;
+            padding: 12px 0px;
+            form{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                svg{
+                    font-size: 26px;
+                }
+                input{
+                    width: 82%;
+                    border: none;
+                }
+                button{
+                    border: none;
+                    background: none;
+                    font-weight: bold;
+                    color: #0095f6;
+                }
+            }
+        }
+        
+    }
+
+    .profile{
+        width: 38%;
+        .profile-info{
+            .logout{
+                a{
+                    color: #0095f6;
+                    font-weight: 600;
+                }
+            }
+            .info{
+                .pro-img{
+                    img{
+                        width: 48px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
