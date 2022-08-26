@@ -12,7 +12,7 @@ const Verify = () => {
   const { token } = useParams()
 
   // TokenValidate if right the token then return user id
-  const user_id =  TokenValidate(token, '/account-verify')
+  const user_id = TokenValidate(token, '/account-verify')
 
   // User verify update
   axios.post('http://localhost:5050/api/user/verify', { user_id }).then(res => {

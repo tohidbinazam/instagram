@@ -19,7 +19,6 @@ import AccountVerify from './pages/AccountVerify/AccountVerify';
 
 function App() {
 
-
   const { authDispatch } = useContext(AuthContext)
 
   // Get token

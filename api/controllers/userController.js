@@ -134,7 +134,7 @@ export const userRegister = async (req, res, next) => {
         // Create new user
         const user =  await User.create({ ...req.body, password })
         
-        const verify_link = await createLink(user._id, 'verify-account', '30d')
+        const verify_link = await createLink(user._id, 'verify-account', '20s')
         sentMail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
         
         res.status(200).json(user)
