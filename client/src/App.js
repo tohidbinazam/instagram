@@ -26,20 +26,18 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      try {
-        axios.get('http://localhost:5050/api/user/me',{
-          headers : {
-            authorization : token
-          }
-          }).then(res => {
-            authDispatch({type: 'LOGGED_IN', payload: res.data})
-          })
-          .catch(() => {
-            authDispatch({type: 'LOGGED_OUT'})
-          })
-      } catch (error) {
-        console.log(error);
+      
+      axios.get('http://localhost:5050/api/user/me',{
+      headers : {
+        authorization : token
       }
+      }).then(res => {
+        authDispatch({type: 'LOGGED_IN', payload: res.data})
+      })
+      .catch(() => {
+        authDispatch({type: 'LOGGED_OUT'})
+      })
+      
     }else{
       authDispatch({type: 'LOGGED_OUT'})
     }

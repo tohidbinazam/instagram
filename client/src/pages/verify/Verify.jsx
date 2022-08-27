@@ -1,26 +1,26 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Link, useParams } from 'react-router-dom';
-import TokenValidate from '../../utility/TokenValidate';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 
 const Verify = () => {
 
-
+  const navigate = useNavigate()
   const [status, setStatus] = useState('')
 
   const { token } = useParams()
 
-  // TokenValidate if right the token then return user id
-  const user_id = TokenValidate(token, '/account-verify')
+   axios.post('http://localhost:5050/api/verify-token', { token }).then((res) => {
 
-  // User verify update
-  axios.post('http://localhost:5050/api/user/verify', { user_id }).then(res => {
-    setStatus(res.data)
-  }).catch(() => {
-    setStatus('Invalid verify URL')
-  })
+      // User verify update
+      axios.post('http://localhost:5050/api/user/verify', { token, user_id: res.data }).then(res => {
+        setStatus(res.data)
+      })
 
+    }).catch(() => {
+      navigate('/invalid-link/account-verify')
+    })
+  
   return (
     <div>
         <div className='my-5 text-center'>

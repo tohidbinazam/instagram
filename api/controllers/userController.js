@@ -208,9 +208,11 @@ export const loggedInUser = async (req, res, next) => {
 export const verifyAccount = async (req, res, next) => {
 
     // Get token with object
-    const { user_id } = req.body
+    const { token, user_id } = req.body
 
     try {
+        await Token.findOneAndDelete({ token })
+
         // User verified status data update
         await User.findByIdAndUpdate(user_id, {
             isVerified : true

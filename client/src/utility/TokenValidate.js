@@ -1,15 +1,12 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-const TokenValidate = (token, main) => {
+const tokenValidate = async (token) => {
 
-    const navigate = useNavigate()
-
-    axios.post('http://localhost:5050/api/verify-token', { token }).then((res) => {
+    await axios.post('http://localhost:5050/api/verify-token', { token }).then((res) => {
       return res.data
     }).catch(() => {
-      navigate(`/invalid-link${main}`)
+      return false
     })
 }
 
-export default TokenValidate
+export default tokenValidate

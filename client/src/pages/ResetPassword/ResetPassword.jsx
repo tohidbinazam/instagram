@@ -1,14 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import Footer from '../../components/footer/Footer';
-import TokenValidate from '../../utility/TokenValidate';
+import tokenValidate from '../../utility/tokenValidate';
 
 const ResetPassword = () => {
 
     const { token } = useParams()
 
     // Token validation function
-    TokenValidate(token, '/forgot-password')
+    tokenValidate(token)
     
     const handleSubmit = (e) => {
         e.preventDefault()

@@ -6,7 +6,7 @@ import userRouter from './routers/userRouter.js'
 import errorHandler from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import VerifyToken from './controllers/verifyToken.js';
+import verifyToken from './controllers/verifyToken.js';
 
 // Express init
 const app = express()
@@ -33,7 +33,7 @@ app.use('/api/student', studentRouter)
 app.use('/api/user', userRouter)
 
 // Token verify
-app.post('/api/verify-token', VerifyToken)
+app.post('/api/verify-token', verifyToken)
 
 // Express error handler
 app.use(errorHandler)
