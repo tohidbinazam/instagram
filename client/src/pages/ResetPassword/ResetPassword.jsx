@@ -68,7 +68,7 @@ const ResetPassword = () => {
                                 </form>
                             </div>
                             <div className="card-footer">
-                                <p className='alert alert-danger d-flex justify-content-between'>Create a password at least 6 characters long. <button data-bs-dismiss='alert' className='btn-close'></button></p>
+                                <p className='alert alert-danger text-center'>Create a password at least 6 characters long.</p>
                             </div>
                         </div>
                     </div>
