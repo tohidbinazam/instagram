@@ -3,7 +3,6 @@ import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import createError from "./createError.js";
 import { sentMail } from "../utility/sentMail.js";
-import { createJWT } from "../utility/createJWT.js";
 import Token from "../models/Token.js";
 import createLink from "../utility/createLink.js";
 
@@ -134,7 +133,7 @@ export const userRegister = async (req, res, next) => {
         // Create new user
         const user =  await User.create({ ...req.body, password })
         
-        const verify_link = await createLink(user._id, 'verify-account', '20s')
+        const verify_link = await createLink(user._id, 'verify-account', '30d')
         sentMail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
         
         res.status(200).json(user)
@@ -177,12 +176,21 @@ export const userLogin = async (req, res, next) => {
 
 
 /**
- * 
+ * @access Private 
+ * @route  /api/user/logout
+ * @method DELETE
+ */
+
+export const userLogout = (req, res, next) => {
+    res.clearCookie('access_token').status(200).json('Remove cookie')
+}
+
+
+/**
  * @access Private 
  * @route  /api/user/me
  * @method GET
  */
-
 export const loggedInUser = async (req, res, next) => {
 
     const token = req.headers.authorization
@@ -211,7 +219,7 @@ export const verifyAccount = async (req, res, next) => {
     const { token, user_id } = req.body
 
     try {
-        await Token.findOneAndDelete({ token })
+        await Token.findOneAndRemove({ token })
 
         // User verified status data update
         await User.findByIdAndUpdate(user_id, {
@@ -254,10 +262,11 @@ export const resentVerify = async (req, res, next) => {
 }
 
 
-
-
-
-
+/**
+ * @access public
+ * @route /api/user/forgot-password
+ * @method POST
+ */
 export const forgotPassword = async (req, res, next) => {
     
     const { email } = req.body
@@ -276,5 +285,26 @@ export const forgotPassword = async (req, res, next) => {
         next(error)
     }
     
+}
 
+
+/**
+ * @access public
+ * @route /api/user/reset-password
+ * @method PATCH
+ */
+export const resetPassword = async (req, res, next) => {
+
+    const { token, user_id, pass } = req.body
+    
+    try {
+        await Token.findOneAndRemove({ token })
+
+        const password = await bcryptjs.hash(pass, 12)
+        await User.findByIdAndUpdate(user_id, { password }, { new: true })
+        
+        res.status(200).json('Successfully update your password')
+    } catch (error) {
+        next(error)
+    }
 }

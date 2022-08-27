@@ -8,11 +8,15 @@ import cookie from 'js-cookie'
 import swal from 'sweetalert'
 import AuthContext from '../../context/AuthContext';
 import { toast } from 'react-toastify';
+import LoaderContext from '../../context/LoaderContext';
 
 const Login = () => {
 
     // AuthContext
     const { authDispatch } = useContext(AuthContext)
+
+    // Top loader context
+    const { loaderDispatch } = useContext(LoaderContext)
 
     // Input state
     const [input, setInput] = useState({})
@@ -29,6 +33,9 @@ const Login = () => {
     // Handle form submit
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        // Top bar loader
+        loaderDispatch('START')
         try {
             if (input.auth && input.password) {
                 await axios.post('http://localhost:5050/api/user/login', {email: input.auth, password: input.password}).then(res => {

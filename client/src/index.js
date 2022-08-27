@@ -5,14 +5,17 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss';
 import AuthProvider from './providers/AuthProvider';
+import LoaderProvider from './providers/LoaderProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <LoaderProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </LoaderProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

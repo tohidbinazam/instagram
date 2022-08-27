@@ -30,7 +30,7 @@ const ForgotPassword = () => {
 
   return (
     <div className='forgot-password text-center my-5'>
-        <div class="container">
+        <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-4">
                     <div className="card my-5">

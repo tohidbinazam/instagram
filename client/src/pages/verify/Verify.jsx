@@ -10,16 +10,16 @@ const Verify = () => {
 
   const { token } = useParams()
 
-   axios.post('http://localhost:5050/api/verify-token', { token }).then((res) => {
+  axios.post('http://localhost:5050/api/verify-token', { token }).then(res => {
 
-      // User verify update
-      axios.post('http://localhost:5050/api/user/verify', { token, user_id: res.data }).then(res => {
-        setStatus(res.data)
-      })
-
-    }).catch(() => {
-      navigate('/invalid-link/account-verify')
+    // User verify update
+    axios.post('http://localhost:5050/api/user/verify', { token, user_id: res.data }).then(res => {
+      setStatus(res.data)
     })
+
+  }).catch(() => {
+    navigate('/invalid-link/account-verify')
+  })
   
   return (
     <div>
@@ -33,7 +33,7 @@ const Verify = () => {
                             </div>
                             <div className="card-body">
                                 <h6 className='my-3'>{ status }</h6>
-                                <p>Now, After login you can access all feature in your account</p>
+                                <p className='my-2'>Now, After login you can access all feature in your account</p>
                                 <Link className='btn btn-primary' to='/login'>Login</Link>
                             </div>
                         </div>

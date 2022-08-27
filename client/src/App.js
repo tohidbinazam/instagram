@@ -16,10 +16,13 @@ import EmailSent from './pages/EmailSent/EmailSent';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import InvalidLink from './pages/InvalidLink/InvalidLink';
 import AccountVerify from './pages/AccountVerify/AccountVerify';
+import LoadingBar from 'react-top-loading-bar'
+import LoaderContext from './context/LoaderContext';
 
 function App() {
 
   const { authDispatch } = useContext(AuthContext)
+  const { loader_state, loaderDispatch } = useContext(LoaderContext)
 
   // Get token
   const token = Cookies.get('token')
@@ -48,6 +51,12 @@ function App() {
 
   return (
     <div className="App">
+        <LoadingBar
+          color='#2998ff'
+          height='4px'
+          progress={loader_state}
+          onLoaderFinished={ () => loaderDispatch('END') }
+        />
         <ToastContainer />
       <Routes>
         <Route path='/' element={ <AuthMiddleware> <Home /> </AuthMiddleware> } />

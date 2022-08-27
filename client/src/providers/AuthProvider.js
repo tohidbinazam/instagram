@@ -12,10 +12,10 @@ const INITIAL_STATE = {
 // Create provider
 const AuthProvider = ({ children }) => {
 
-    const [ State,  authDispatch ] = useReducer( authReducer, INITIAL_STATE )
+    const [ state,  authDispatch ] = useReducer( authReducer, INITIAL_STATE )
 
     // State destructure
-    const { isLoggedIn, user } = State
+    const { isLoggedIn, user } = state
 
     return(
         <AuthContext.Provider value={{ isLoggedIn, user, authDispatch }}>

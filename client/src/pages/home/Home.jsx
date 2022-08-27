@@ -10,14 +10,27 @@ import { useContext } from 'react';
 import Cookies from 'js-cookie'
 import AuthContext from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+import LoaderContext from '../../context/LoaderContext';
 
 const Home = () => {
 
+  // Auth context
   const { user, authDispatch } = useContext(AuthContext)
 
-  const handleLogOut = () => {
-    authDispatch({type: 'LOGGED_OUT'})
-    Cookies.remove('token')
+  // Top loader context
+  const { loaderDispatch } = useContext(LoaderContext)
+
+  const handleLogOut = (e) => {
+    e.preventDefault()
+
+    // Top bar loader
+    loaderDispatch('START')
+
+    axios.delete('http://localhost:5050/api/user/logout').then(() => {
+      authDispatch({type: 'LOGGED_OUT'})
+      Cookies.remove('token')
+    })
   }
 
   return (
