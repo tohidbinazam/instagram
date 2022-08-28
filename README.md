@@ -9,10 +9,13 @@ git clone https://github.com/tohidbinazam/instagram.git
 Note: Copy any code and just right click on mouse in your terminal,  
 Result: Auto past it.
 
-### 2. Open terminal in project root folder and run this command
+### 2. Open terminal in project root folder 'Instagram' and run those commands
 ```html
 npm install
 cd client
+```
+
+```html
 npm install
 cd ..
 ```
@@ -31,6 +34,7 @@ start .env
 SERVER_NAME = Instagram
 SEVER_PORT = 5050
 APP_MOOD = Development
+APP_URL = http://localhost:3000
 MONGO_STRING = ``Hear is your MongoDB database string``
 SECRET_KEY = ``JWT secret key``
 SENDGRID_API_KEY = `Create SendGrid account or knock me on messenger`
