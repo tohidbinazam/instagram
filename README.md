@@ -13,10 +13,10 @@ Result: Auto past it.
 ```html
 npm install
 cd client
-```
-
-```html
 npm install
+```
+and 👇
+```html
 cd ..
 ```
 
