@@ -4,10 +4,10 @@
 ```html
  git clone https://github.com/tohidbinazam/instagram.git
  ```
+Copy this and just right click on your mouse in you terminal, Auto past it.
 
 
-
-### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
