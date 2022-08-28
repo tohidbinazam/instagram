@@ -1,6 +1,6 @@
 ## How to run this project ?
 
-_Recommended terminal: git bash_
+`## Recommended terminal: git bash`
 
 ### 1. Download this project or command with git clone
 ```html
