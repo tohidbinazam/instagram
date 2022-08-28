@@ -33,8 +33,9 @@ SEVER_PORT = 5050
 APP_MOOD = Development
 MONGO_STRING = ``Hear is your MongoDB database string``
 SECRET_KEY = ``JWT secret key``
-SENDGRID_API_KEY = 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
+SENDGRID_API_KEY = `Create a SendGrid account or knock me on messenger`
  ```
+Note: [Tohid Bin Azam](https://www.facebook.com/tohidbinazam/) Fb account you knock from here
 
 ### 5. In Root folder terminal past this final code
 ```html
