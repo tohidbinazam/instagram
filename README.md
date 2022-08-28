@@ -33,7 +33,7 @@ SEVER_PORT = 5050
 APP_MOOD = Development
 MONGO_STRING = ``Hear is your MongoDB database string``
 SECRET_KEY = ``JWT secret key``
-SENDGRID_API_KEY = `Create a SendGrid account or knock me on messenger`
+SENDGRID_API_KEY = `Create SendGrid account or knock me on messenger`
  ```
 Note: [Tohid Bin Azam](https://www.facebook.com/tohidbinazam/) Fb account you knock from here
 
