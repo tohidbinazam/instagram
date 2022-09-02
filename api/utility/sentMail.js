@@ -1,6 +1,6 @@
 import sgMail from '@sendgrid/mail'
 
-export const sentMail = async (to, subject, html) => {
+const sentMail = async (to, subject, html) => {
     try {
 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
@@ -16,3 +16,5 @@ export const sentMail = async (to, subject, html) => {
     }
 
 }
+
+export default sentMail

@@ -15,6 +15,10 @@ const SignUp = () => {
     // Input state
     const [input, setInput] = useState({})
 
+    // eslint-disable-next-line no-useless-escape
+    const email_pattern = /^[^\.-/][a-z0-9-_\.]{1,}@[a-z0-9-]{1,}\.[a-z\.]{2,}$/;
+    const number_pattern = /^(\+8801|8801|01)[0-9]{9}$/;
+
     // Handle input state
     const handleInputs = (e) => {
 
@@ -25,14 +29,31 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         
-        if (input.email && input.name && input.username && input.password) {
-            await axios.post('http://localhost:5050/api/user/register', input).then(res => {
+        if (input.info && input.name && input.username && input.password) {
+
+            if (email_pattern.test(input.info)) {
+
+                await axios.post('http://localhost:5050/api/user/register', {...input, email:input.info}).then(res => {
+                    
+                    swal('Success', 'Your account created successfully', 'success')
+                    navigate(`/email-sent/account-verify/${ res.data.email }`)
+                }).catch((error) => {
+                    toast.error(error.response.data.message)
+                })
+
+            }else if (number_pattern.test(input.info)) {
+
+                await axios.post('http://localhost:5050/api/user/register', {...input, number:input.info}).then(res => {
+                    
+                    swal('Success', 'Your account created successfully', 'success')
+                    navigate(`/email-sent/account-verify/${ res.data.number }`)
+                }).catch((error) => {
+                    toast.error(error.response.data.message)
+                })
                 
-                swal('Success', 'Your account created successfully', 'success')
-                navigate(`/email-sent/account-verify/${ res.data.email }`)
-            }).catch((error) => {
-                toast.error(error.response.data.message)
-            })
+            } else {
+                toast.error("Set a Valid Email or Number")
+            }   
 
         }else{
             toast.error("All fields are required")
@@ -51,7 +72,7 @@ const SignUp = () => {
                         <a className='login-with-fb-sign' href="https://"> <AiFillFacebook /> Log in with Facebook </a>
                         <div className="divider">OR</div>
                         <form onSubmit={ handleSubmit }>
-                            <input type="text" name="email" onChange={ handleInputs } placeholder='Mobile Number or Email' />
+                            <input type="text" name="info" onChange={ handleInputs } placeholder='Mobile Number or Email' />
                             <input type="text" name="name" onChange={ handleInputs } placeholder='Full Name' />
                             <input type="text" name="username" onChange={ handleInputs } placeholder='Username' />
                             <input type="password" name="password" onChange={ handleInputs } placeholder='Password' />

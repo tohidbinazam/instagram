@@ -39,6 +39,8 @@ MONGO_STRING = ``Hear is your MongoDB database string``
 SECRET_KEY = ``JWT secret key``
 SENDGRID_API_KEY = `Create SendGrid account or knock me on messenger`
  ```
+Use SendGrid or use by default Gmail service
+
 Note: [Tohid Bin Azam](https://www.facebook.com/tohidbinazam/) Fb account you knock from here
 
 ### 5. In Root folder terminal past this final code

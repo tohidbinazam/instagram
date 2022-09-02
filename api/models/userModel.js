@@ -9,9 +9,15 @@ const userModel = mongoose.Schema({
     },
     email : {
         type : String,
-        required : true,
         trim : true,
-        unique : true
+        unique : true,
+        default : ''
+    },
+    number : {
+        type : String,
+        trim : true,
+        unique : true,
+        default : ''
     },
     username : {
         type : String,

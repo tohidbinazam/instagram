@@ -2,9 +2,11 @@ import User from "../models/userModel.js";
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import createError from "./createError.js";
-import { sentMail } from "../utility/sentMail.js";
+import sentMail from "../utility/sentMail.js";
 import Token from "../models/Token.js";
 import createLink from "../utility/createLink.js";
+import mailByEmail from "../utility/mailByEmail.js";
+import { verifySMS } from "../utility/sentSMS.js";
 
 /**
  * @access Public 
@@ -116,10 +118,16 @@ export const userRegister = async (req, res, next) => {
 
     try {
 
-        const { email, username } = req.body
+        const { email, number, username } = req.body
 
         const check_email = await User.findOne({ email })
+        console.log(check_email);
         if (check_email) {
+            return next(createError(500, 'Already exists this user'))
+        }
+        
+        const check_number = await User.findOne({ number })
+        if (check_number) {
             return next(createError(500, 'Already exists this user')) 
         }
 
@@ -132,9 +140,20 @@ export const userRegister = async (req, res, next) => {
 
         // Create new user
         const user =  await User.create({ ...req.body, password })
-        
-        const verify_link = await createLink(user._id, 'verify-account', '30d')
-        sentMail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
+
+        if (user.number) {
+            verifySMS(user.number)
+        }
+        if (user.email) {
+            
+            const verify_link = await createLink(user._id, 'verify-account', '30d')
+    
+            // Sent mail by Gmail
+            mailByEmail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
+    
+            // Sent mail by SendGrid
+            // sentMail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
+        }
         
         res.status(200).json(user)
             
@@ -249,7 +268,12 @@ export const resentVerify = async (req, res, next) => {
 
         if (user && !user.isVerified) {
             const verify_link = await createLink(user._id, 'verify-account', '30d')
-            sentMail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
+
+            // Sent mail by Gmail
+            mailByEmail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
+
+            // Sent mail by SendGrid
+            // sentMail(user.email, 'Verify Account', `Please verify Your account by click this <a href=${verify_link}>LINK</a>`)
 
             res.status(200).json(user)
         } else {
@@ -275,7 +299,12 @@ export const forgotPassword = async (req, res, next) => {
     
         if (user) {
             const reset_pass_link = await createLink(user._id, 'reset-password')
-            sentMail(user.email, 'Reset Password', `Reset Your Password by click this <a href=${reset_pass_link}>LINK</a>`)
+
+            // Sent mail by Gmail
+            mailByEmail(user.email, 'Reset Password', `Reset Your Password by click this <a href=${reset_pass_link}>LINK</a>`)
+
+            // Sent mail by SendGrid
+            // sentMail(user.email, 'Reset Password', `Reset Your Password by click this <a href=${reset_pass_link}>LINK</a>`)
             res.status(200).json('Link sent successfully ')
         }else{
             return next(createError(404, 'User not found'))
