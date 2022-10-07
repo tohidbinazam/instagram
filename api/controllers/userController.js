@@ -6,7 +6,7 @@ import sentMail from "../utility/sentMail.js";
 import Token from "../models/Token.js";
 import createLink from "../utility/createLink.js";
 import mailByEmail from "../utility/mailByEmail.js";
-import { verifySMS } from "../utility/sentSMS.js";
+import { checkVerification, verifySMS, welcomeSMS } from "../utility/smsVerification.js";
 
 /**
  * @access Public 
@@ -120,15 +120,15 @@ export const userRegister = async (req, res, next) => {
 
         const { email, number, username } = req.body
 
+
         const check_email = await User.findOne({ email })
-        console.log(check_email);
         if (check_email) {
-            return next(createError(500, 'Already exists this user'))
+            return next(createError(500, 'Already exists this email'))
         }
         
         const check_number = await User.findOne({ number })
         if (check_number) {
-            return next(createError(500, 'Already exists this user')) 
+            return next(createError(500, 'Already exists this Phone number')) 
         }
 
         const check_username = await User.findOne({ username })
@@ -336,4 +336,20 @@ export const resetPassword = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+}
+
+
+
+export const verificationCode = async (req, res, next) => {
+
+    const { number, sms_otp } = req.body
+
+    const valid = checkVerification(number, sms_otp)
+    console.log(valid);
+    if (valid) {
+        res.status(200).json('Successfully verify your account')
+    } else {
+        next(createError(404, 'Invalid Code'))
+    }
+    
 }

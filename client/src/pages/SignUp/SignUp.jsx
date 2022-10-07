@@ -34,9 +34,9 @@ const SignUp = () => {
             if (email_pattern.test(input.info)) {
 
                 await axios.post('http://localhost:5050/api/user/register', {...input, email:input.info}).then(res => {
-                    
+                    localStorage.setItem('email', input.info)
                     swal('Success', 'Your account created successfully', 'success')
-                    navigate(`/email-sent/account-verify/${ res.data.email }`)
+                    navigate('/account-verify/email-sent')
                 }).catch((error) => {
                     toast.error(error.response.data.message)
                 })
@@ -44,9 +44,9 @@ const SignUp = () => {
             }else if (number_pattern.test(input.info)) {
 
                 await axios.post('http://localhost:5050/api/user/register', {...input, number:input.info}).then(res => {
-                    
+                    localStorage.setItem('number', input.info)
                     swal('Success', 'Your account created successfully', 'success')
-                    navigate(`/email-sent/account-verify/${ res.data.number }`)
+                    navigate('/account-verify/otp-sent')
                 }).catch((error) => {
                     toast.error(error.response.data.message)
                 })

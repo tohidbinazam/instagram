@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const EmailSent = () => {
 
-    const { main, email } = useParams()
-    
+
+  const email = localStorage.getItem('email')
+
   return (
     <div className='my-5 text-center'>
         <div className="container">
@@ -17,7 +18,7 @@ const EmailSent = () => {
                         <div className="card-body">
                             <h6 className='my-3'>Email Sent</h6>
                             <p className='my-3'>We sent an email to <b>{ email }</b> with a link to get back into your account.</p>
-                            <Link className='btn btn-secondary' to={`/${main}`}>Try Again</Link>
+                            <Link className='btn btn-secondary' to='/account-verify'>Try Again</Link>
                             <b className='mx-2'>OR</b>
                             <Link className='btn btn-primary' to='/login'>OK</Link>
                         </div>

@@ -18,6 +18,7 @@ import InvalidLink from './pages/InvalidLink/InvalidLink';
 import AccountVerify from './pages/AccountVerify/AccountVerify';
 import LoadingBar from 'react-top-loading-bar'
 import LoaderContext from './context/LoaderContext';
+import SmsOtpSent from './pages/sms-otp-sent/SmsOtpSent';
 
 function App() {
 
@@ -53,7 +54,7 @@ function App() {
     <div className="App">
         <LoadingBar
           color='#2998ff'
-          height='4px'
+          height='3px'
           progress={loader_state}
           onLoaderFinished={ () => loaderDispatch('END') }
         />
@@ -66,7 +67,8 @@ function App() {
         <Route path='/verify-account/:token' element={ <Verify /> } />
         <Route path='/forgot-password' element={ <ForgotPassword /> } />
         <Route path='/reset-password/:token' element={ <ResetPassword /> } />
-        <Route path='/email-sent/:main/:email' element={ <EmailSent /> } />
+        <Route path='/account-verify/email-sent' element={ <EmailSent /> } />
+        <Route path='/account-verify/otp-sent' element={ <SmsOtpSent /> } />
         <Route path='/invalid-link/:main' element={ <InvalidLink /> } />
         <Route path='/account-verify' element={ <AccountVerify /> } />
       </Routes>

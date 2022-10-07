@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import colors from 'colors'
 import mongoDBConnect from './config/db.js';
 import studentRouter from './routers/studentRouter.js'
 import userRouter from './routers/userRouter.js'
@@ -38,7 +39,10 @@ app.post('/api/verify-token', verifyToken)
 // Express error handler
 app.use(errorHandler)
 
+// // App frontend
+// app.use(express.static('build'))
+
 app.listen(port, () => {
     mongoDBConnect()
-    console.log(`${server_name} server running on http://localhost:${port}`)
+    console.log(`${server_name} server running on http://localhost:${port}`.bgCyan)
 })

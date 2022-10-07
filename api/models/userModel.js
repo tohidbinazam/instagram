@@ -11,13 +11,11 @@ const userModel = mongoose.Schema({
         type : String,
         trim : true,
         unique : true,
-        default : ''
     },
     number : {
         type : String,
         trim : true,
         unique : true,
-        default : ''
     },
     username : {
         type : String,
