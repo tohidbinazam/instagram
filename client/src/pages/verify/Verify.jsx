@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 const Verify = () => {
@@ -10,17 +11,22 @@ const Verify = () => {
 
   const { token } = useParams()
 
-  axios.post('http://localhost:5050/api/verify-token', { token }).then(res => {
-
-    // User verify update
-    axios.post('http://localhost:5050/api/user/verify', { token, user_id: res.data }).then(res => {
-      setStatus(res.data)
-      localStorage.removeItem('email')
+  useEffect(() => {
+    
+    axios.post('http://localhost:5050/api/verify-token', { token }).then(res => {
+  
+      // User verify update
+      axios.post('http://localhost:5050/api/user/verify', { token, user_id: res.data }).then(res => {
+        setStatus(res.data)
+        localStorage.removeItem('email')
+      })
+  
+    }).catch(() => {
+      navigate('/invalid-link/account-verify')
     })
 
-  }).catch(() => {
-    navigate('/invalid-link/account-verify')
-  })
+  }, [navigate, token])
+
   
   return (
     <div>
