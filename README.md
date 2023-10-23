@@ -1,36 +1,36 @@
-## How to run this project ?
+## How to run this project?
 
 `Recommended terminal: git bash`
 
 ### 1. Download this project or command with git clone
-```html
+```HTML
 git clone https://github.com/tohidbinazam/instagram.git
 ```
-Note: Copy any code and just right click on mouse in your terminal,  
+Note: Copy any code and just right-click on the mouse in your terminal,  
 Result: Auto past it.
 
-### 2. Open terminal in project root folder 'Instagram' and run those commands
-```html
+### 2. Open the terminal in the project root folder 'Instagram' and run those commands
+```HTML
 npm install
 cd client
 npm install
 ```
 and 👇
-```html
+```HTML
 cd ..
 ```
 
-### 3. In project root folder create a file, name '.env' by using this command
-```html
+### 3. In the project root folder create a file, named '.env' by using this command
+```HTML
 touch .env
  ```
 
-### 4. Open .env file by 1st command, past the bellow codes and update those info
-```html
+### 4. Open the .env file by 1st command, past the bellow codes, and update with those variables
+```HTML
 start .env
  ```
 
-```html
+```HTML
 SERVER_NAME = Instagram
 SEVER_PORT = 5050
 APP_MOOD = Development
@@ -43,8 +43,8 @@ Use SendGrid or use by default Gmail service
 
 Note: [Tohid Bin Azam](https://www.facebook.com/tohidbinazam/) Fb account you knock from here
 
-### 5. In Root folder terminal past this final code
-```html
+### 5. In the Root folder terminal past this final code
+```HTML
 npm start
  ```
 
